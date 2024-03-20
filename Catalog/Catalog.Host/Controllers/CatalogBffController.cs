@@ -69,6 +69,7 @@ public class CatalogBffController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PaginatedItemByIdResponse<CatalogItemDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetByIdItem(GetByIdItemRequest request)
     {

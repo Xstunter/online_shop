@@ -7,6 +7,8 @@ using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
 using Infrastructure.Configuration;
 using Infrastructure.Middleware;
+using Basket.Host.Repositories.Interfaces;
+using Basket.Host.Repositories;
 
 var configuration = GetConfiguration();
 
@@ -61,8 +63,9 @@ builder.Services.AddAuthorization(configuration);
 
 builder.Services.AddTransient<IJsonSerializer, JsonSerializer>();
 builder.Services.AddTransient<IRedisCacheConnectionService, RedisCacheConnectionService>();
-builder.Services.AddTransient<ICacheService, CacheService>();
+builder.Services.AddTransient<IBasketRepository, BasketRepository>();
 builder.Services.AddTransient<IBasketService, BasketService>();
+builder.Services.AddTransient<HttpClient>();
 
 builder.Services.AddCors(options =>
 {

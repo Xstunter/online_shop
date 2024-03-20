@@ -1,25 +1,30 @@
 using Basket.Host.Models;
+using Basket.Host.Repositories.Interfaces;
 using Basket.Host.Services.Interfaces;
 
 namespace Basket.Host.Services;
 
 public class BasketService : IBasketService
 {
-    private readonly ICacheService _cacheService;
+    private readonly IBasketRepository _basketRepository;
 
-    public BasketService(ICacheService cacheService)
+    public BasketService(IBasketRepository basketRepository)
     {
-        _cacheService = cacheService;
-    }
-    
-    public async Task TestAdd(string userId, string data)
-    {
-       await _cacheService.AddOrUpdateAsync(userId, data);
+        _basketRepository = basketRepository;
     }
 
-    public async Task<TestGetResponse> TestGet(string userId)
+    public async Task AddOrUpdateItemToBasketAsync<T>(string userId, string data)
     {
-        var result = await _cacheService.GetAsync<string>(userId);
-        return new TestGetResponse() { Data = result };
+        await _basketRepository.AddOrUpdateItemToBasketAsync(userId, data);
+    }
+
+    public Task TestAdd(string userId, string data)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<TestGetResponse> TestGet(string userId)
+    {
+        throw new NotImplementedException();
     }
 }

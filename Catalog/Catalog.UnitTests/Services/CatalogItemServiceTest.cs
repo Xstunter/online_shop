@@ -21,6 +21,7 @@ namespace Catalog.UnitTests.Services
 
         private readonly CatalogItem _testItem = new CatalogItem()
         {
+            Id = 1,
             Name = "Test",
             Description = "Test",
             Price = 100,
@@ -95,7 +96,7 @@ namespace Catalog.UnitTests.Services
             int testId = 1;
 
             _catalogItemRepository.Setup(s => s.Delete(
-                It.IsAny<int>())).ReturnsAsync(testResult);
+                It.Is<int>(s => s == _testItem.Id))).ReturnsAsync(true);
 
             var result = await _catalogItemService.Delete(testId);
 
@@ -107,10 +108,10 @@ namespace Catalog.UnitTests.Services
         public async Task DeleteItemAsync_Failed()
         {
             bool testResult = false;
-            int testId = 1000;
+            int testId = 100;
 
             _catalogItemRepository.Setup(s => s.Delete(
-                It.IsAny<int>())).ReturnsAsync(testResult);
+                It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(false);
 
             var result = await _catalogItemService.Delete(testId);
 
