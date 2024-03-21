@@ -6,9 +6,9 @@ namespace MVC.Controllers;
 
 public class CatalogController : Controller
 {
-    private  readonly IBrasketService _catalogService;
+    private  readonly ICatalogService _catalogService;
 
-    public CatalogController(IBrasketService catalogService)
+    public CatalogController(ICatalogService catalogService)
     {
         _catalogService = catalogService;
     }
@@ -33,8 +33,8 @@ public class CatalogController : Controller
         var vm = new IndexViewModel()
         {
             CatalogItems = catalog.Data,
-            Brands = await _catalogService.GetBrands(0, 6),
-            Types = await _catalogService.GetTypes(0, 5),
+            Brands = await _catalogService.GetBrands(0, 10),
+            Types = await _catalogService.GetTypes(0, 10),
             PaginationInfo = info
         };
 

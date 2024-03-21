@@ -6,15 +6,18 @@ namespace MVC.Controllers;
 
 public class BasketController : Controller
 {
-    private readonly IBrasketService _basketService;
+    private readonly IBasketService _basketService;
 
-    public BasketController(IBrasketService basketService)
+    public BasketController(IBasketService basketService)
     {
         _basketService = basketService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? id, int? page, int? itemsPage)
     {
-        throw new NotImplementedException();
+        page ??= 0;
+        itemsPage ??= 1;
+
+        return View();
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Basket.Host.Services.Interfaces
+﻿namespace MVC.Services.Interfaces
 {
-    public interface GetBasketItems
+    public interface IBasketService
     {
     }
 }

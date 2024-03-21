@@ -6,7 +6,7 @@ using MVC.ViewModels;
 
 namespace MVC.Services;
 
-public class CatalogService : IBrasketService
+public class CatalogService : ICatalogService
 {
     private readonly IOptions<AppSettings> _settings;
     private readonly IHttpClientService _httpClient;

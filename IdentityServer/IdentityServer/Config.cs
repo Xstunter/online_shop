@@ -106,7 +106,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html" },
+                    RedirectUris = { $"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
                     PostLogoutRedirectUris = { $"{configuration["BasketApi"]}/swagger/" },
 
                     AllowedScopes =

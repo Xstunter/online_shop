@@ -1,6 +1,6 @@
-﻿namespace Basket.Host.Services
+﻿namespace MVC.Services
 {
-    public class GetBasketItems
+    public class BasketService
     {
     }
 }
