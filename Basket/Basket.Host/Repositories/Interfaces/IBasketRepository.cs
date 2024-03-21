@@ -2,8 +2,9 @@
 {
     public interface IBasketRepository
     {
-        public Task AddOrUpdateItemToBasketAsync<T>(string key, T value);
+        public Task AddItemToBasketAsync<T>(string key, T value);
         public Task<T> GetItemBasketAsync<T>(string key);
-        public Task<bool> DeleteItemBasket(string key);
+        public Task<bool> DeleteItemBasketAsync<T>(string key, T data);
+        public Task<List<T>> GetItemsBasketAsync<T>(string key);
     }
 }

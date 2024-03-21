@@ -94,6 +94,8 @@ app.UseCors("CorsPolicy");
 
 //app.UseRequestCulture(10);  //requests limit
 
+app.UseMiddleware<RequestLoggingMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

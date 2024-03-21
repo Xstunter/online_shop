@@ -6,5 +6,7 @@ public interface IBasketService
 {
     Task TestAdd(string userId, string data);
     Task<TestGetResponse> TestGet(string userId);
-    public Task AddOrUpdateItemToBasketAsync<T>(string userId, string data);
+    public Task AddItemToBasketAsync<T>(string userId, T data);
+    public Task<bool> DeleteItemBasketAsync<T>(string userId, T data);
+    public Task<List<T>> GetItemsBasketAsync<T>(string userId);
 }
