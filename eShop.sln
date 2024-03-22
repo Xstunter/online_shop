@@ -32,6 +32,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{1AA092
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Host", "Basket\Basket.Host\Basket.Host.csproj", "{8101A295-218D-4B66-9478-24E10F5F6FF0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{8C7F541B-84B9-4C86-AFD8-0D6FE512977B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Host", "Order\Order.Host\Order.Host.csproj", "{74E45727-D2A5-4703-9182-617722ABE998}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,10 @@ Global
 		{8101A295-218D-4B66-9478-24E10F5F6FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8101A295-218D-4B66-9478-24E10F5F6FF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8101A295-218D-4B66-9478-24E10F5F6FF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74E45727-D2A5-4703-9182-617722ABE998}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E45727-D2A5-4703-9182-617722ABE998}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E45727-D2A5-4703-9182-617722ABE998}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E45727-D2A5-4703-9182-617722ABE998}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +81,7 @@ Global
 		{41295524-FF98-44D4-B1A3-0ADEEC870B25} = {A8CDDA12-0C93-4544-8ED9-FA426D4DEB25}
 		{4AD44790-4375-40FA-A103-54CB849DAFDC} = {950E9743-AF58-4BA7-9799-CED49DC142FB}
 		{8101A295-218D-4B66-9478-24E10F5F6FF0} = {1AA092B2-D57F-4059-B593-66D6A44DF08C}
+		{74E45727-D2A5-4703-9182-617722ABE998} = {8C7F541B-84B9-4C86-AFD8-0D6FE512977B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F3C28FA-BC92-4B02-AE0C-2229F6E111EC}

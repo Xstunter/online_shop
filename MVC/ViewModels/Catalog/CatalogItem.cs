@@ -1,4 +1,6 @@
-﻿namespace MVC.ViewModels;
+﻿using MVC.ViewModels.Catalog;
+
+namespace MVC.ViewModels;
 
 public record CatalogItem
 {

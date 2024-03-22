@@ -52,6 +52,7 @@ namespace Basket.Host.Controllers
 
             var itemData = new BasketItemDataDto
             {
+                Id = firstItem.Id,
                 Name = firstItem.Name,
                 PictureUrl = firstItem.PictureUrl,
                 Price = firstItem.Price
@@ -59,7 +60,7 @@ namespace Basket.Host.Controllers
 
             await _basketService.AddItemToBasketAsync<BasketItemDataDto>(userId, itemData);
 
-            return Ok();
+            return Ok(itemData);
         }
 
         [HttpPost]
@@ -86,6 +87,7 @@ namespace Basket.Host.Controllers
 
             var itemData = new BasketItemDataDto
             {
+                Id = firstItem.Id,
                 Name = firstItem.Name,
                 PictureUrl = firstItem.PictureUrl,
                 Price = firstItem.Price
@@ -93,7 +95,7 @@ namespace Basket.Host.Controllers
 
             await _basketService.DeleteItemBasketAsync<BasketItemDataDto>(userId, itemData);
 
-            return Ok();
+            return Ok(id);
         }
 
         [HttpPost]
