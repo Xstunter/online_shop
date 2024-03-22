@@ -1,4 +1,4 @@
-# Setup
+# SETUP
 
 ### Hosts file
 
