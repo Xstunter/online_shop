@@ -1,6 +1,11 @@
-﻿namespace MVC.Services.Interfaces
+﻿using MVC.ViewModels.Basket;
+
+namespace MVC.Services.Interfaces
 {
     public interface IBasketService
     {
+        public Task AddItemBasket(int id);
+        public Task DeleteItemBasket(int id);
+        public Task<BasketItems> GetBasketItems();
     }
 }

@@ -13,9 +13,19 @@ public class BasketService : IBasketService
         _basketRepository = basketRepository;
     }
 
-    public async Task AddOrUpdateItemToBasketAsync<T>(string userId, string data)
+    public async Task AddItemToBasketAsync<T>(string userId, T data)
     {
-        await _basketRepository.AddOrUpdateItemToBasketAsync(userId, data);
+        await _basketRepository.AddItemToBasketAsync(userId, data);
+    }
+
+    public async Task<bool> DeleteItemBasketAsync<T>(string userId, T data)
+    {
+        return await _basketRepository.DeleteItemBasketAsync(userId, data);
+    }
+
+    public async Task<List<T>> GetItemsBasketAsync<T>(string userId)
+    {
+        return await _basketRepository.GetItemsBasketAsync<T>(userId);
     }
 
     public Task TestAdd(string userId, string data)

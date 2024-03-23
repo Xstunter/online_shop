@@ -2,7 +2,10 @@
 using Basket.Host.Services.Interfaces;
 using Infrastructure.Configuration;
 using Infrastructure.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using StackExchange.Redis;
 
 namespace Basket.Host.Repositories
@@ -25,29 +28,26 @@ namespace Basket.Host.Repositories
             _jsonSerializer = jsonSerializer;
             _config = config.Value;;
         }
-        public Task AddOrUpdateItemToBasketAsync<T>(string key, T value) => AddOrUpdateItemToBasketInternalAsync(key, value);
+        public Task AddItemToBasketAsync<T>(string key, T value) => AddItemToBasketInternalAsync(key, value);
 
         private IDatabase GetRedisDatabase() => _redisCacheConnectionService.Connection.GetDatabase();
         private string GetItemCacheKey(string userId) =>
             $"{userId}";
 
-        private async Task AddOrUpdateItemToBasketInternalAsync<T>(string key, T value,
-            IDatabase redis = null!, TimeSpan? expiry = null)
+        private async Task AddItemToBasketInternalAsync<T>(string key, T value,
+    IDatabase redis = null!, TimeSpan? expiry = null)
         {
             redis = redis ?? GetRedisDatabase();
             expiry = expiry ?? _config.CacheTimeout;
 
             var cacheKey = GetItemCacheKey(key);
-            var serialized = _jsonSerializer.Serialize(value);
+            var serialized = JsonConvert.SerializeObject(value);
 
-            if (await redis.StringSetAsync(cacheKey, serialized, expiry))
-            {
-                _logger.LogInformation($"Cached value for key {key} cached");
-            }
-            else
-            {
-                _logger.LogInformation($"Cached value for key {key} updated");
-            }
+            await redis.ListRightPushAsync(cacheKey, serialized);
+
+            await redis.KeyExpireAsync(cacheKey, expiry);
+
+            _logger.LogInformation($"Cached value for key {key} cached");
         }
 
         public async Task<T> GetItemBasketAsync<T>(string key)
@@ -62,9 +62,41 @@ namespace Basket.Host.Repositories
                 _jsonSerializer.Deserialize<T>(serialized.ToString())
                 : default(T)!;
         }
-        public Task<bool> DeleteItemBasket(string key)
+        public async Task<bool> DeleteItemBasketAsync<T>(string key, T value)
         {
-            throw new NotImplementedException();
+            var redis = GetRedisDatabase();
+
+            if (await redis.KeyExistsAsync(key))
+            {
+                var cacheKey = GetItemCacheKey(key);
+
+                var serialized = _jsonSerializer.Serialize(value);
+
+                await redis.ListRemoveAsync(key, serialized);
+
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<List<T>> GetItemsBasketAsync<T>(string key)
+        {
+            var redis = GetRedisDatabase();
+            
+
+            if (await redis.KeyExistsAsync(key))
+            {
+                var listItems = await redis.ListRangeAsync(key);
+                var items = new List<T>();
+
+                foreach (var serializedItem in listItems)
+                {
+                    var item = JsonConvert.DeserializeObject<T>(serializedItem);
+                    items.Add(item);
+                }
+                return items;
+            }
+            return new List<T>();
         }
     }
 }

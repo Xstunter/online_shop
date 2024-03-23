@@ -8,6 +8,7 @@ using Basket.Host.Models.Dtos;
 using Basket.Host.Services.Interfaces;
 using Newtonsoft.Json;
 using Basket.Host.Models.Response;
+using System.Net;
 
 namespace Basket.Host.Controllers
 {
@@ -27,7 +28,8 @@ namespace Basket.Host.Controllers
             _basketService = basketService;
         }
 
-        [HttpPost(Name = "AddBasketItem")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<IActionResult> AddBasketItem(int id)
         {
             string userId = User.FindFirstValue("sub");
@@ -46,24 +48,65 @@ namespace Basket.Host.Controllers
                 return NotFound("Catalog item not found.");
             }
 
-            var firstCatalogItem = catalogItem.Data.FirstOrDefault();
-            if (firstCatalogItem == null)
+            var firstItem = catalogItem.Data.First();
+
+            var itemData = new BasketItemDataDto
             {
-                // Обработка случая, когда данных нет
+                Id = firstItem.Id,
+                Name = firstItem.Name,
+                PictureUrl = firstItem.PictureUrl,
+                Price = firstItem.Price
+            };
+
+            await _basketService.AddItemToBasketAsync<BasketItemDataDto>(userId, itemData);
+
+            return Ok(itemData);
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteBasketItem(int id)
+        {
+            string userId = User.FindFirstValue("sub");
+
+            var response = await _httpClient.PostAsJsonAsync("http://www.alevelwebsite.com:5000/api/v1/CatalogBff/GetByIdItem", new GetByIdItemRequest { Id = id, PageSize = 1 });
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to get catalog item. Status code: {response.StatusCode}");
+            }
+
+            var catalogItem = await response.Content.ReadFromJsonAsync<PaginatedItemsResponse<CatalogItemDto>>();
+
+            if (catalogItem == null)
+            {
                 return NotFound("Catalog item not found.");
             }
 
-            string itemData = ConvertItemToData(firstCatalogItem);
+            var firstItem = catalogItem.Data.First();
 
-            await _basketService.AddOrUpdateItemToBasketAsync<CatalogItemDto>(userId, itemData);
+            var itemData = new BasketItemDataDto
+            {
+                Id = firstItem.Id,
+                Name = firstItem.Name,
+                PictureUrl = firstItem.PictureUrl,
+                Price = firstItem.Price
+            };
 
-            return Ok();
+            await _basketService.DeleteItemBasketAsync<BasketItemDataDto>(userId, itemData);
+
+            return Ok(id);
         }
 
-        private string ConvertItemToData(CatalogItemDto catalogItem)
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetItemsBasket()
         {
-            // Преобразование объекта к нужному формату для сервиса корзины
-            return JsonConvert.SerializeObject(catalogItem);
+            string userId = User.FindFirstValue("sub");
+
+            var items = await _basketService.GetItemsBasketAsync<BasketItemDataDto>(userId);
+
+            return Ok(items);
         }
     }
 }

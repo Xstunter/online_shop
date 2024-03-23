@@ -2,7 +2,7 @@
 using MVC.Dtos;
 using MVC.Models.Enums;
 using MVC.Services.Interfaces;
-using MVC.ViewModels;
+using MVC.ViewModels.Catalog;
 
 namespace MVC.Services;
 
