@@ -55,8 +55,12 @@ namespace IdentityServer
                     ClientName = "MVC PKCE Client",
                     AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = {new Secret("secret".Sha256())},
-                    RedirectUris = { $"{configuration["MvcUrl"]}/signin-oidc"},
-                    AllowedScopes = {"openid", "profile", "mvc"},
+                    RedirectUris = 
+                    { 
+                        $"{configuration["MvcUrl"]}/signin-oidc",
+                        "http://www.alevelwebsite.com:5001/signin-oidc"
+                    },
+                    AllowedScopes = {"openid", "profile", "mvc", "basket.basketItem"},
                     RequirePkce = true,
                     RequireConsent = false
                 },

@@ -1,6 +1,7 @@
 ﻿using MVC.Services.Interfaces;
 using MVC.ViewModels.CatalogViewModels;
 using MVC.ViewModels.Pagination;
+using System.Runtime.CompilerServices;
 
 namespace MVC.Controllers;
 
@@ -13,11 +14,14 @@ public class BasketController : Controller
         _basketService = basketService;
     }
 
-    public async Task<IActionResult> Index(int? id, int? page, int? itemsPage)
+    public async Task<IActionResult> AddToBasket(int id)
     {
-        page ??= 0;
-        itemsPage ??= 1;
-
+        await _basketService.AddItemBasket(id);
+        return RedirectToAction("Index", "Catalog");
+    }
+    public async Task<IActionResult> Index()
+    {
+       
         return View();
     }
 }

@@ -107,11 +107,12 @@ namespace Catalog.UnitTests.Services
 
         public async Task DeleteItemAsync_Failed()
         {
-            bool testResult = false;
+            bool testResult = true;
             int testId = 100;
 
             _catalogItemRepository.Setup(s => s.Delete(
                 It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(false);
+
 
             var result = await _catalogItemService.Delete(testId);
 

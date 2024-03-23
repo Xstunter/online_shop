@@ -24,7 +24,9 @@ namespace MVC.Services
         }
         public async Task AddItemBasket(int id)
         {
-            //var result = await _httpClient.SendAsync<BasketItems, object>($"{_settings.Value.BasketUrl}/AddBasketItem")
+
+            var result = await _httpClient.SendAsync<BasketItems, int>($"{_settings.Value.BasketUrl}/AddBasketItem", HttpMethod.Post, id);
+
 
         }
 

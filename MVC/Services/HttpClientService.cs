@@ -18,7 +18,7 @@ public class HttpClientService : IHttpClientService
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<TResponse> SendAsync<TResponse, TRequest>(string url, HttpMethod method, TRequest? content)
+    public async Task<TResponse> SendAsync<TResponse, TRequest>(string url, HttpMethod method, TRequest content)
     {
         var client = _clientFactory.CreateClient();
 
@@ -34,8 +34,8 @@ public class HttpClientService : IHttpClientService
 
         if (content != null)
         {
-            httpMessage.Content =
-                new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+            var jsonContent = JsonConvert.SerializeObject(content);
+            httpMessage.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
         }
 
         var result = await client.SendAsync(httpMessage);
@@ -47,6 +47,6 @@ public class HttpClientService : IHttpClientService
             return response!;
         }
 
-        return default(TResponse) !;
+        return default(TResponse)!;
     }
 }

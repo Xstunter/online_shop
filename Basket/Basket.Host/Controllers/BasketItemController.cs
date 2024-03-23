@@ -9,6 +9,7 @@ using Basket.Host.Services.Interfaces;
 using Newtonsoft.Json;
 using Basket.Host.Models.Response;
 using System.Net;
+using ServiceStack.Web;
 
 namespace Basket.Host.Controllers
 {
@@ -30,7 +31,7 @@ namespace Basket.Host.Controllers
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> AddBasketItem(int id)
+        public async Task<IActionResult> AddBasketItem([FromBody] int id)
         {
             string userId = User.FindFirstValue("sub");
 
