@@ -66,7 +66,7 @@ namespace Basket.Host.Controllers
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> DeleteBasketItem(int id)
+        public async Task<IActionResult> DeleteBasketItem([FromBody] int id)
         {
             string userId = User.FindFirstValue("sub");
 

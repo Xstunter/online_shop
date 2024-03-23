@@ -11,6 +11,6 @@
     <div class="esh-catalog-price">
         <span>@Model.Price.ToString("N2")</span>
     </div>
-    <button asp-controller="Basket" asp-action="AddToBasket" asp-route-id ="@Model.Id" type="submit" class="btn btn-primary add-to-basket-btn">Add to cart</button>
+    <button asp-controller="Basket" asp-action="AddToBasket" asp-route-id="@Model.Id" type="submit" class="btn btn-dark add-to-basket-btn">Add to cart</button>
     <input type="hidden" asp-for="@Model.Id" name="id" />
 </form>

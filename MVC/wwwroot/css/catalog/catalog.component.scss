@@ -144,9 +144,18 @@
     }
 
     &-price {
-        font-size: 28px;
+        font-size: 8px;
         font-weight: 900;
         text-align: center;
+
+        &::before {
+            content: '$';
+        }
+    }
+
+    &-pricebasket {
+        font-size: 18px;
+        font-weight: 900;
 
         &::before {
             content: '$';
