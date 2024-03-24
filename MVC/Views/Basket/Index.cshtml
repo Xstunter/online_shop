@@ -24,7 +24,7 @@
                     <tr>
                         <td><img src="http://localhost/@item.PictureUrl" alt="@item.Name" style="max-width: 100px;" /></td>
                         <td>@item.Name</td>
-                        <td class="esh-catalog-price">@item.Price.ToString("N2")</td>
+                        <td style="font-size:18px; text-align:left" class="esh-catalog-price">@item.Price.ToString("N2")</td>
                         <td>
                             <form>
                                 <input type="hidden" name="itemId" value="@item.Id" />
@@ -36,7 +36,11 @@
             </tbody>
         </table>
 
-        <div class="esh-catalog-pricebasket">Total: @Model.BasketItems.Sum(item => item.Price).ToString("N2")</div>
+        <div style="font-size:25px; font-weight:900; text-align:center">
+            Total:<span class="esh-catalog-price">@Model.BasketItems.Sum(item => item.Price).ToString("N2")</span>
+
+        </div>
+        
 
         <button class="btn btn-primary" onclick="location.href='@Url.Action("Checkout", "Order")'">Checkout</button>
     }

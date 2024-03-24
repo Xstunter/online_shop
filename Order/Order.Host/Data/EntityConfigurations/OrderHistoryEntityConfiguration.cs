@@ -10,11 +10,14 @@ namespace Order.Host.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<OrderHistory> builder)
         {
-            builder.ToTable("Order");
+            builder.ToTable("OrderHistories");
 
             builder.Property(ci => ci.Id)
                 .UseHiLo("order_hilo")
                 .IsRequired();
+
+            builder.Property(ci => ci.ClientId)
+               .IsRequired(true);
 
             builder.Property(ci => ci.Name)
                 .IsRequired(true)
@@ -26,6 +29,10 @@ namespace Order.Host.Data.EntityConfigurations
 
             builder.Property(ci => ci.TotalPrice)
                 .IsRequired(true);
+
+            builder.HasMany(order => order.BasketItems) 
+                   .WithOne(basketItem => basketItem.OrderHistory) 
+                   .HasForeignKey(basketItem => basketItem.OrderHistoryId);
         }
     }
 }
