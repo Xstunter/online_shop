@@ -1,10 +1,12 @@
-﻿namespace Basket.Host.Repositories.Interfaces
+﻿using Basket.Host.Models.Dtos;
+
+namespace Basket.Host.Repositories.Interfaces
 {
     public interface IBasketRepository
     {
-        public Task AddItemToBasketAsync<T>(string key, T value);
+        public Task AddItemToBasketAsync(string key, BasketItemDataDto value);
         public Task<T> GetItemBasketAsync<T>(string key);
-        public Task<bool> DeleteItemBasketAsync<T>(string key, T data);
+        public Task<bool> DeleteItemBasketAsync(string key, int id);
         public Task<List<T>> GetItemsBasketAsync<T>(string key);
     }
 }

@@ -18,24 +18,24 @@ namespace Catalog.Host.Services
             _catalogBrandRepository = catalogBrandRepository;
         }
 
-        public Task<int?> Add(string brand)
+        public Task<int?> AddAsync(string brand)
         {
-            return ExecuteSafeAsync(() => _catalogBrandRepository.Add(brand));
+            return ExecuteSafeAsync(() => _catalogBrandRepository.AddAsync(brand));
         }
 
-        public Task<bool> Delete(int id)
+        public Task<bool> DeleteAsync(int id)
         {
-            return ExecuteSafeAsync(() => _catalogBrandRepository.Delete(id));
+            return ExecuteSafeAsync(() => _catalogBrandRepository.DeleteAsync(id));
         }
 
-        public Task<List<int>> GetBrandIds()
+        public Task<List<int>> GetBrandIdsAsync()
         {
-            return ExecuteSafeAsync(() => _catalogBrandRepository.GetBrandIds());
+            return ExecuteSafeAsync(() => _catalogBrandRepository.GetBrandIdsAsync());
         }
 
-        public Task<bool> Update(int id, string brand)
+        public Task<bool> UpdateAsync(int id, string brand)
         {
-            return ExecuteSafeAsync(() => _catalogBrandRepository.Update(id, brand));
+            return ExecuteSafeAsync(() => _catalogBrandRepository.UpdateAsync(id, brand));
         }
     }
 }

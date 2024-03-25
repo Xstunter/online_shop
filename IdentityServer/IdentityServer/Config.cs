@@ -41,6 +41,13 @@ namespace IdentityServer
                     {
                         new Scope("basket.basketItem"),
                     },
+                },
+                new ApiResource("order")
+                {
+                    Scopes = new List<Scope>
+                    {
+                        new Scope("order.orderHistory"),
+                    },
                 }
             };
         }
@@ -116,6 +123,32 @@ namespace IdentityServer
                     AllowedScopes =
                     {
                         "mvc", "basket.basketItem"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "order",
+
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                },
+                new Client
+                {
+                    ClientId = "orderswaggerui",
+                    ClientName = "Order Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"http://www.alevelwebsite.com:5004/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
+                    PostLogoutRedirectUris = { $"{configuration["OrderApi"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "mvc", "order.orderHistory"
                     }
                 }
             };

@@ -10,7 +10,7 @@ public interface ICatalogItemRepository
     Task<PaginatedItems<CatalogItem>> GetByBrandAsync(int pageIndex, int pageSize, string brand);
     Task<PaginatedItems<CatalogItem>> GetByTypeAsync(int pageIndex, int pageSize, string type);
     Task<PaginatedItems<CatalogItem>> GetByFilterAsync(int pageIndex, int pageSize, int? brandFilter, int? typeFilter);
-    Task<int?> Add(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
-    Task<bool> Update(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
-    Task<bool> Delete(int id);
+    Task<int?> AddAsync(string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
+    Task<bool> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, string pictureFileName);
+    Task<bool> DeleteAsync(int id);
 }

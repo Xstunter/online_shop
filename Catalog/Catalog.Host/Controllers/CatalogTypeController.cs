@@ -28,7 +28,7 @@ public class CatalogTypeController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateTypeRequest request)
     {
-        var result = await _catalogTypeService.Add(request.Type);
+        var result = await _catalogTypeService.AddAsync(request.Type);
         return Ok(new AddItemResponse<int?>() { Id = result });
     }
 
@@ -36,7 +36,7 @@ public class CatalogTypeController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Delete(DeleteTypeRequest request)
     {
-        var isDeleted = await _catalogTypeService.Delete(request.Id);
+        var isDeleted = await _catalogTypeService.DeleteAsync(request.Id);
         if (!isDeleted)
         {
             return NotFound();
@@ -49,7 +49,7 @@ public class CatalogTypeController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Update(UpdateTypeRequest request)
     {
-        var isUpdated = await _catalogTypeService.Update(request.Id, request.Type);
+        var isUpdated = await _catalogTypeService.UpdateAsync(request.Id, request.Type);
         if (!isUpdated)
         {
             return NotFound();

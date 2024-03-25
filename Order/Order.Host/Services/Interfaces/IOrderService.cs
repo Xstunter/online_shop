@@ -1,10 +1,12 @@
-﻿using Order.Host.Models.Dtos;
+﻿using Order.Host.Models;
+using Order.Host.Models.Dtos;
+using Order.Host.Models.Response;
 
 namespace Order.Host.Services.Interfaces
 {
     public interface IOrderService
     {
-        public Task<List<OrderHistoryDto>> GetAllOrders(int clientId);
-        public Task<OrderHistoryDto> GetOrder(int id);
+        public Task<PaginatedOrdersResponse<OrderHistoryDto>?> GetAllClientOrdersAsync(int clientId);
+        public Task<PaginatedOrderResponse<OrderHistoryDto>?> GetClientOrderAsync(int id);
     }
 }

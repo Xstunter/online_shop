@@ -1,10 +1,11 @@
-﻿using Order.Host.Models.Dtos;
+﻿using Order.Host.Data;
+using Order.Host.Data.Entities;
 
 namespace Order.Host.Repositories.Interfaces
 {
     public interface IOrderRepository
     {
-        public Task<List<OrderHistoryDto>> GetAllOrders(int clientId);
-        public Task<OrderHistoryDto> GetOrder(int id);
+        public Task<PaginatedOrder<OrderHistory>> GetAllClientOrdersAsync(int clientId);
+        public Task<PaginatedOrder<OrderHistory>> GetClientOrderAsync(int id);
     }
 }

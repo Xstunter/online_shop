@@ -1,3 +1,4 @@
+using FluentAssertions.Common;
 using Infrastructure.Extensions;
 using Infrastructure.Filters;
 using Infrastructure.Middleware;
@@ -5,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Order.Host.Configurations;
 using Order.Host.Data;
+using Order.Host.Repositories;
+using Order.Host.Repositories.Interfaces;
 using Order.Host.Services;
 using Order.Host.Services.Interfaces;
 
@@ -39,7 +42,8 @@ builder.Services.AddSwaggerGen(options =>
                 TokenUrl = new Uri($"{authority}/connect/token"),
                 Scopes = new Dictionary<string, string>()
                 {
-                    { "mvc", "website" },
+                    { "mvc", "website"},
+                    { "order.orderHistory", "order.orderHistory"}
                 }
             }
         }
@@ -55,13 +59,10 @@ builder.Services.AddAuthorization(configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-/*builder.Services.AddTransient<ICatalogItemRepository, CatalogItemRepository>();
-builder.Services.AddTransient<ICatalogBrandRepository, CatalogBrandRepository>();
-builder.Services.AddTransient<ICatalogTypeRepository, CatalogTypeRepository>();
-builder.Services.AddTransient<ICatalogService, CatalogService>();
-builder.Services.AddTransient<ICatalogItemService, CatalogItemService>();
-builder.Services.AddTransient<ICatalogBrandService, CatalogBrandService>();
-builder.Services.AddTransient<ICatalogTypeService, CatalogTypeService>();*/
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderBasketRepository, OrderBasketRepository>();
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderBasketService, OrderBasketService>();
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();
@@ -82,7 +83,7 @@ var app = builder.Build();
 app.UseSwagger()
     .UseSwaggerUI(setup =>
     {
-        setup.SwaggerEndpoint($"{configuration["PathBase"]}/swagger/v1/swagger.json", "Catalog.API V1");
+        setup.SwaggerEndpoint($"{configuration["PathBase"]}/swagger/v1/swagger.json", "Order.API V1");
         setup.OAuthClientId("orderswaggerui");
         setup.OAuthAppName("Order Swagger UI");
     });

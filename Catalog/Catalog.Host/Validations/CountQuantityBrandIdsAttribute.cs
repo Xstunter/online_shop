@@ -19,7 +19,7 @@ namespace Catalog.Host.Validations
 
             return Task.Run(async () =>
             {
-                var ids = await catalogBrandService.GetBrandIds();
+                var ids = await catalogBrandService.GetBrandIdsAsync();
 
                 if (ids.Contains(count))
                 {

@@ -19,24 +19,24 @@ namespace Catalog.Host.Services
             _catalogTypeRepository = catalogTypeRepository;
         }
 
-        public Task<int?> Add(string type)
+        public Task<int?> AddAsync(string type)
         {
-            return ExecuteSafeAsync(() => _catalogTypeRepository.Add(type));
+            return ExecuteSafeAsync(() => _catalogTypeRepository.AddAsync(type));
         }
 
-        public Task<bool> Delete(int id)
+        public Task<bool> DeleteAsync(int id)
         {
-            return ExecuteSafeAsync(() => _catalogTypeRepository.Delete(id));
+            return ExecuteSafeAsync(() => _catalogTypeRepository.DeleteAsync(id));
         }
 
-        public Task<List<int>> GetTypeIds()
+        public Task<List<int>> GetTypeIdsAsync()
         {
-            return ExecuteSafeAsync(() => _catalogTypeRepository.GetBrandIds());
+            return ExecuteSafeAsync(() => _catalogTypeRepository.GetBrandIdsAsync());
         }
 
-        public Task<bool> Update(int id, string type)
+        public Task<bool> UpdateAsync(int id, string type)
         {
-            return ExecuteSafeAsync(() => _catalogTypeRepository.Update(id, type));
+            return ExecuteSafeAsync(() => _catalogTypeRepository.UpdateAsync(id, type));
         }
     }
 }

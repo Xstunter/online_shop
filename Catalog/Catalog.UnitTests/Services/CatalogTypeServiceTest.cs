@@ -46,10 +46,10 @@ namespace Catalog.UnitTests.Services
         {
             var testResult = 1;
 
-            _catalogTypeRepository.Setup(s => s.Add(
+            _catalogTypeRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Add(_testType.Type);
+            var result = await _catalogTypeService.AddAsync(_testType.Type);
 
             result.Should().Be(testResult);
         }
@@ -60,10 +60,10 @@ namespace Catalog.UnitTests.Services
         {
             int? testResult = null;
 
-            _catalogTypeRepository.Setup(s => s.Add(
+            _catalogTypeRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Add(_testType.Type);
+            var result = await _catalogTypeService.AddAsync(_testType.Type);
 
             result.Should().Be(testResult);
         }
@@ -74,10 +74,10 @@ namespace Catalog.UnitTests.Services
             bool testResult = true;
             int testId = 1;
 
-            _catalogTypeRepository.Setup(s => s.Delete(
+            _catalogTypeRepository.Setup(s => s.DeleteAsync(
                 It.IsAny<int>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Delete(testId);
+            var result = await _catalogTypeService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
         }
@@ -89,10 +89,10 @@ namespace Catalog.UnitTests.Services
             bool testResult = false;
             int testId = 1000;
 
-            _catalogTypeRepository.Setup(s => s.Delete(
+            _catalogTypeRepository.Setup(s => s.DeleteAsync(
                 It.IsAny<int>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Delete(testId);
+            var result = await _catalogTypeService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
         }
@@ -108,11 +108,11 @@ namespace Catalog.UnitTests.Services
                 Type = "NewType"
             };
 
-            _catalogTypeRepository.Setup(s => s.Update(
+            _catalogTypeRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Update(testId, _newTestType.Type);
+            var result = await _catalogTypeService.UpdateAsync(testId, _newTestType.Type);
 
             result.Should().Be(testResult);
 
@@ -130,11 +130,11 @@ namespace Catalog.UnitTests.Services
                 Type = "NewType"
             };
 
-            _catalogTypeRepository.Setup(s => s.Update(
+            _catalogTypeRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogTypeService.Update(testId, _newTestType.Type);
+            var result = await _catalogTypeService.UpdateAsync(testId, _newTestType.Type);
 
             result.Should().Be(testResult);
         }

@@ -11,7 +11,7 @@ using Order.Host.Data;
 namespace Order.Host.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240324120137_InitialCreate")]
+    [Migration("20240325090812_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,10 @@ namespace Order.Host.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+
+                    b.Property<string>("OrderStatus")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");

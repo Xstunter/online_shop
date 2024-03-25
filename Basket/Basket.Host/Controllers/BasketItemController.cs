@@ -56,46 +56,27 @@ namespace Basket.Host.Controllers
                 Id = firstItem.Id,
                 Name = firstItem.Name,
                 PictureUrl = firstItem.PictureUrl,
-                Price = firstItem.Price
+                Price = firstItem.Price,
+                Amount = 1
             };
 
-            await _basketService.AddItemToBasketAsync<BasketItemDataDto>(userId, itemData);
+            await _basketService.AddItemToBasketAsync(userId, itemData);
 
             return Ok(itemData);
         }
 
         [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteBasketItem([FromBody] int id)
         {
             string userId = User.FindFirstValue("sub");
 
-            var response = await _httpClient.PostAsJsonAsync("http://www.alevelwebsite.com:5000/api/v1/CatalogBff/GetByIdItem", new GetByIdItemRequest { Id = id, PageSize = 1 });
+            var deleteStatus = await _basketService.DeleteItemBasketAsync(userId, id);
 
-            if (!response.IsSuccessStatusCode)
+            if(deleteStatus == false) 
             {
-                throw new HttpRequestException($"Failed to get catalog item. Status code: {response.StatusCode}");
+                return NotFound(id);
             }
-
-            var catalogItem = await response.Content.ReadFromJsonAsync<PaginatedItemsResponse<CatalogItemDto>>();
-
-            if (catalogItem == null)
-            {
-                return NotFound("Catalog item not found.");
-            }
-
-            var firstItem = catalogItem.Data.First();
-
-            var itemData = new BasketItemDataDto
-            {
-                Id = firstItem.Id,
-                Name = firstItem.Name,
-                PictureUrl = firstItem.PictureUrl,
-                Price = firstItem.Price
-            };
-
-            await _basketService.DeleteItemBasketAsync<BasketItemDataDto>(userId, itemData);
-
             return Ok(id);
         }
 

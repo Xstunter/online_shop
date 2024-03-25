@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Order.Host.Data.Entities;
-
+using Order.Host.Data.Enums;
 
 namespace Order.Host.Data.EntityConfigurations
 {
@@ -29,6 +30,10 @@ namespace Order.Host.Data.EntityConfigurations
 
             builder.Property(ci => ci.TotalPrice)
                 .IsRequired(true);
+
+            builder.Property(ci => ci.OrderStatus)
+                .IsRequired(true)
+                .HasConversion<string>();
 
             builder.HasMany(order => order.BasketItems) 
                    .WithOne(basketItem => basketItem.OrderHistory) 

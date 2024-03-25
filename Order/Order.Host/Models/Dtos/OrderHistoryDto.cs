@@ -1,4 +1,7 @@
-﻿namespace Order.Host.Models.Dtos
+﻿using Order.Host.Data.Enums;
+using System.ComponentModel.DataAnnotations;
+
+namespace Order.Host.Models.Dtos
 {
     public class OrderHistoryDto
     {
@@ -7,7 +10,9 @@
         public string Name { get; set; }
         public string LastName { get; set; }
         public decimal TotalPrice { get; set; }
-        public List<BasketItemDto> BasketItem { get; set; }
+        [EnumDataType(typeof(OrderStatus))]
+        public OrderStatus OrderStatus { get; set; }
+        public List<BasketItemDto> BasketItems { get; set; }
 
     }
 }
