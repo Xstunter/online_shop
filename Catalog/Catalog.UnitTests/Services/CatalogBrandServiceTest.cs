@@ -47,10 +47,10 @@ namespace Catalog.UnitTests.Services
         {
             var testResult = 1;
 
-            _catalogBrandRepository.Setup(s => s.Add(
+            _catalogBrandRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Add(_testBrand.Brand);
+            var result = await _catalogBrandService.AddAsync(_testBrand.Brand);
 
             result.Should().Be(testResult);
         }
@@ -61,10 +61,10 @@ namespace Catalog.UnitTests.Services
         {
             int? testResult = null;
 
-            _catalogBrandRepository.Setup(s => s.Add(
+            _catalogBrandRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Add(_testBrand.Brand);
+            var result = await _catalogBrandService.AddAsync(_testBrand.Brand);
 
             result.Should().Be(testResult);
         }
@@ -76,10 +76,10 @@ namespace Catalog.UnitTests.Services
             bool testResult = true;
             int testId = 1;
 
-            _catalogBrandRepository.Setup(s => s.Delete(
+            _catalogBrandRepository.Setup(s => s.DeleteAsync(
                 It.IsAny<int>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Delete(testId);
+            var result = await _catalogBrandService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
 
@@ -92,10 +92,10 @@ namespace Catalog.UnitTests.Services
             bool testResult = false;
             int testId = 1000;
 
-            _catalogBrandRepository.Setup(s => s.Delete(
+            _catalogBrandRepository.Setup(s => s.DeleteAsync(
                 It.IsAny<int>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Delete(testId);
+            var result = await _catalogBrandService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
         }
@@ -111,11 +111,11 @@ namespace Catalog.UnitTests.Services
                 Brand = "NewBrand"
             };
 
-            _catalogBrandRepository.Setup(s => s.Update(
+            _catalogBrandRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Update(testId, _newTestBrand.Brand);
+            var result = await _catalogBrandService.UpdateAsync(testId, _newTestBrand.Brand);
 
             result.Should().Be(testResult);
 
@@ -133,11 +133,11 @@ namespace Catalog.UnitTests.Services
                 Brand = "NewBrand"
             };
 
-            _catalogBrandRepository.Setup(s => s.Update(
+            _catalogBrandRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogBrandService.Update(testId, _newTestBrand.Brand);
+            var result = await _catalogBrandService.UpdateAsync(testId, _newTestBrand.Brand);
 
             result.Should().Be(testResult);
         }

@@ -30,7 +30,7 @@ public class CatalogBrandController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Add(CreateBrandRequest request)
     {
-        var result = await _catalogBrandService.Add(request.Brand);
+        var result = await _catalogBrandService.AddAsync(request.Brand);
         return Ok(new AddItemResponse<int?>() { Id = result });
     }
 
@@ -38,7 +38,7 @@ public class CatalogBrandController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Delete(DeleteBrandRequest request)
     {
-        var isDeleted = await _catalogBrandService.Delete(request.Id);
+        var isDeleted = await _catalogBrandService.DeleteAsync(request.Id);
         if (!isDeleted)
         {
             return NotFound();
@@ -51,7 +51,7 @@ public class CatalogBrandController : ControllerBase
     [ProducesResponseType(typeof(AddItemResponse<int?>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Update(UpdateBrandRequest request)
     {
-        var isUpdated = await _catalogBrandService.Update(request.Id, request.Brand);
+        var isUpdated = await _catalogBrandService.UpdateAsync(request.Id, request.Brand);
         if (!isUpdated)
         {
             return NotFound();

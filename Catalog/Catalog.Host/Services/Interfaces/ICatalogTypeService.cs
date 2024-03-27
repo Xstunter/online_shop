@@ -2,9 +2,9 @@
 {
     public interface ICatalogTypeService
     {
-        Task<int?> Add(string type);
-        Task<bool> Update(int id, string type);
-        Task<bool> Delete(int id);
-        Task<List<int>> GetTypeIds();
+        Task<int?> AddAsync(string type);
+        Task<bool> UpdateAsync(int id, string type);
+        Task<bool> DeleteAsync(int id);
+        Task<List<int>> GetTypeIdsAsync();
     }
 }

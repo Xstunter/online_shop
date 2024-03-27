@@ -1,0 +1,42 @@
+﻿@model MVC.ViewModels.OrderViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Order History";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Client Id</th>
+                <th>Name</th>
+                <th>Last Name</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderHistory in Model.OrderHistories)
+            {
+                <tr>
+                    <td>@orderHistory.ClientId</td>
+                    <td>@orderHistory.Name</td>
+                    <td>@orderHistory.LastName</td>
+                    <td>@orderHistory.TotalPrice</td>
+                    <td>@orderHistory.OrderStatus</td>
+                    <td>
+                        <ul>
+                            @foreach (var item in orderHistory.BasketItems)
+                            {
+                                <li>@item.Name - $@item.Price - @item.Amount</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

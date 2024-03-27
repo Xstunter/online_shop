@@ -17,7 +17,7 @@ namespace Catalog.Host.Repositories
             _logger = logger;
         }
 
-        public async Task<int?> Add(string brand)
+        public async Task<int?> AddAsync(string brand)
         {
             var item = await _dbContext.AddAsync(new CatalogBrand
             {
@@ -29,7 +29,7 @@ namespace Catalog.Host.Repositories
             return item.Entity.Id;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Catalog.Host.Repositories
             }
         }
 
-        public async Task<List<int>> GetBrandIds()
+        public async Task<List<int>> GetBrandIdsAsync()
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Catalog.Host.Repositories
             return new PaginatedItems<CatalogBrand>() { TotalCount = totalItems, Data = itemsOnPage };
         }
 
-        public async Task<bool> Update(int id, string brand)
+        public async Task<bool> UpdateAsync(int id, string brand)
         {
             try
             {

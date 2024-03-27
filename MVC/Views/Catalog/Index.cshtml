@@ -5,6 +5,10 @@
 }
 <section class="esh-catalog-hero">
     <div class="container">
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Order")'">History</button>
+    </div>
+    <div class="container">
+        <a href="@Url.Action("Index", "Basket")"><i class="fa fa-shopping-cart fa-2x"></i></a>
     </div>
 </section>
 
@@ -42,7 +46,6 @@
             {
         <div class="esh-catalog-item col-md-4">
             <partial name="_product" model="catalogItem" />
-            <button class="btn btn-primary add-to-basket-btn" data-item-id="@catalogItem.Id">Add to cart</button>
         </div>
             }
     </div>
@@ -56,4 +59,5 @@
     </div>
     }
 </div>
-     
+
+<script src="https://kit.fontawesome.com/2f5aeaf09a.js" crossorigin="anonymous"></script>

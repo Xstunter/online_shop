@@ -48,7 +48,7 @@ namespace Catalog.UnitTests.Services
         {
             var testResult = 1;
 
-            _catalogItemRepository.Setup(s => s.Add(
+            _catalogItemRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<decimal>(),
@@ -57,7 +57,7 @@ namespace Catalog.UnitTests.Services
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogItemService.Add(_testItem.Name, _testItem.Description,
+            var result = await _catalogItemService.AddAsync(_testItem.Name, _testItem.Description,
                                                        _testItem.Price, _testItem.AvailableStock,
                                                        _testItem.CatalogBrandId, _testItem.CatalogTypeId,
                                                        _testItem.PictureFileName);
@@ -71,7 +71,7 @@ namespace Catalog.UnitTests.Services
         {
             int? testResult = null;
 
-            _catalogItemRepository.Setup(s => s.Add(
+            _catalogItemRepository.Setup(s => s.AddAsync(
                 It.IsAny<string>(),
                 It.IsAny<string>(),
                 It.IsAny<decimal>(),
@@ -80,7 +80,7 @@ namespace Catalog.UnitTests.Services
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogItemService.Add(_testItem.Name, _testItem.Description,
+            var result = await _catalogItemService.AddAsync(_testItem.Name, _testItem.Description,
                                                        _testItem.Price, _testItem.AvailableStock,
                                                        _testItem.CatalogBrandId, _testItem.CatalogTypeId,
                                                        _testItem.PictureFileName);
@@ -95,10 +95,10 @@ namespace Catalog.UnitTests.Services
             bool testResult = true;
             int testId = 1;
 
-            _catalogItemRepository.Setup(s => s.Delete(
+            _catalogItemRepository.Setup(s => s.DeleteAsync(
                 It.Is<int>(s => s == _testItem.Id))).ReturnsAsync(true);
 
-            var result = await _catalogItemService.Delete(testId);
+            var result = await _catalogItemService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
         }
@@ -107,13 +107,14 @@ namespace Catalog.UnitTests.Services
 
         public async Task DeleteItemAsync_Failed()
         {
-            bool testResult = false;
+            bool testResult = true;
             int testId = 100;
 
-            _catalogItemRepository.Setup(s => s.Delete(
-                It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(false);
+            _catalogItemRepository.Setup(s => s.DeleteAsync(
+                It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(true);
 
-            var result = await _catalogItemService.Delete(testId);
+
+            var result = await _catalogItemService.DeleteAsync(testId);
 
             result.Should().Be(testResult);
         }
@@ -136,7 +137,7 @@ namespace Catalog.UnitTests.Services
                 PictureFileName = "NewTest.png"
             };
 
-            _catalogItemRepository.Setup(s => s.Update(
+            _catalogItemRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
@@ -146,7 +147,7 @@ namespace Catalog.UnitTests.Services
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogItemService.Update(testId, _newTestItem.Name, _newTestItem.Description,
+            var result = await _catalogItemService.UpdateAsync(testId, _newTestItem.Name, _newTestItem.Description,
                                                  _newTestItem.Price, _newTestItem.AvailableStock,
                                                  _newTestItem.CatalogBrandId, _newTestItem.CatalogTypeId,
                                                  _newTestItem.PictureFileName);
@@ -171,7 +172,7 @@ namespace Catalog.UnitTests.Services
                 PictureFileName = "NewTest.png"
             };
 
-            _catalogItemRepository.Setup(s => s.Update(
+            _catalogItemRepository.Setup(s => s.UpdateAsync(
                 It.IsAny<int>(),
                 It.IsAny<string>(),
                 It.IsAny<string>(),
@@ -181,7 +182,7 @@ namespace Catalog.UnitTests.Services
                 It.IsAny<int>(),
                 It.IsAny<string>())).ReturnsAsync(testResult);
 
-            var result = await _catalogItemService.Update(testId, _newTestItem.Name, _newTestItem.Description,
+            var result = await _catalogItemService.UpdateAsync(testId, _newTestItem.Name, _newTestItem.Description,
                                                  _newTestItem.Price, _newTestItem.AvailableStock,
                                                  _newTestItem.CatalogBrandId, _newTestItem.CatalogTypeId,
                                                  _newTestItem.PictureFileName);

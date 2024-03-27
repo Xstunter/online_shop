@@ -1,0 +1,54 @@
+﻿@model MVC.ViewModels.BasketViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Basket";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    @if (Model.BasketItems != null && Model.BasketItems.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.BasketItems)
+                {
+                    <tr>
+                        <td><img src="http://localhost/@item.PictureUrl" alt="@item.Name" style="max-width: 100px;" /></td>
+                        <td>@item.Name</td>
+                        <td style="font-size:18px; text-align:left" class="esh-catalog-price">@item.Price.ToString("N2")</td>
+                        <td style="font-size:18px; text-align:center">@item.Amount</td>
+                        <td>
+                            <form>
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <button asp-controller="Basket" asp-action="DeleteItemBasket" asp-route-id="@item.Id" type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div style="font-size:25px; font-weight:900; text-align:center">
+            Total:<span class="esh-catalog-price">@Model.BasketItems.Sum(item => item.Price * item.Amount).ToString("N2")</span>
+
+        </div>
+
+        <div style="text-align:center">
+        <button class="btn btn-dark" onclick="location.href='@Url.Action("AddOrder", "Order")'">Checkout</button>
+        </div>
+    }
+    else
+    {
+        <div>Your basket is empty.</div>
+    }
+</div>

@@ -24,18 +24,17 @@ namespace MVC.Services
         }
         public async Task AddItemBasket(int id)
         {
-            //var result = await _httpClient.SendAsync<BasketItems, object>($"{_settings.Value.BasketUrl}/AddBasketItem")
-
+            await _httpClient.SendAsync<object, int>($"{_settings.Value.BasketUrl}/AddBasketItem", HttpMethod.Post, id);
         }
 
-        public Task DeleteItemBasket(int id)
+        public async Task DeleteItemBasket(int id)
         {
-            throw new NotImplementedException();
+            await _httpClient.SendAsync<object, int>($"{_settings.Value.BasketUrl}/DeleteBasketItem", HttpMethod.Post, id);
         }
 
-        public Task<BasketItems> GetBasketItems()
+        public Task<List<BasketItems>> GetBasketItems()
         {
-            throw new NotImplementedException();
+            return _httpClient.SendAsync<List<BasketItems>, object>($"{_settings.Value.BasketUrl}/GetItemsBasket", HttpMethod.Post, null);
         }
     }
 }

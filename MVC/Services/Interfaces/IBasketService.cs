@@ -6,6 +6,6 @@ namespace MVC.Services.Interfaces
     {
         public Task AddItemBasket(int id);
         public Task DeleteItemBasket(int id);
-        public Task<BasketItems> GetBasketItems();
+        public Task<List<BasketItems>> GetBasketItems();
     }
 }

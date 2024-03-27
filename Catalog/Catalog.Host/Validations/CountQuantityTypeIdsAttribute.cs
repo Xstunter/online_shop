@@ -20,7 +20,7 @@ namespace Catalog.Host.Validations
 
             return Task.Run(async () =>
             {
-                var ids = await catalogTypeService.GetTypeIds();
+                var ids = await catalogTypeService.GetTypeIdsAsync();
 
                 if (ids.Contains(count))
                 {
