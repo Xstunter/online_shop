@@ -23,7 +23,7 @@ namespace Order.Host.Services
         {
             _orderBasketRepository = orderBasketRepository;
         }
-        public Task<int?> AddAsync(int clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> basketItems)
+        public Task<int?> AddAsync(string clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> basketItems)
         {
             return ExecuteSafeAsync(() => _orderBasketRepository.AddAsync(clientId, name, lastName, totalPrice, basketItems));
 

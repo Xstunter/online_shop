@@ -67,7 +67,7 @@ namespace IdentityServer
                         $"{configuration["MvcUrl"]}/signin-oidc",
                         "http://www.alevelwebsite.com:5001/signin-oidc"
                     },
-                    AllowedScopes = {"openid", "profile", "mvc", "basket.basketItem"},
+                    AllowedScopes = {"openid", "profile", "mvc", "basket.basketItem", "order.orderHistory"},
                     RequirePkce = true,
                     RequireConsent = false
                 },

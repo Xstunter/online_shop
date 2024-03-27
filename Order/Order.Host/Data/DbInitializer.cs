@@ -28,8 +28,8 @@ namespace Order.Host.Data
         {
             return new List<OrderHistory>()
             {
-                new OrderHistory() {ClientId = 12345, Name = "Bogdan", LastName = "Datsenko", TotalPrice = 50, OrderStatus = OrderStatus.Cancelled},
-                new OrderHistory() {ClientId = 12345, Name = "Bogdan", LastName = "Datsenko", TotalPrice = 110, OrderStatus = OrderStatus.Processing}
+                new OrderHistory() {ClientId = "12345", Name = "Bogdan", LastName = "Datsenko", TotalPrice = 50, OrderStatus = OrderStatus.Cancelled},
+                new OrderHistory() {ClientId = "12345", Name = "Bogdan", LastName = "Datsenko", TotalPrice = 110, OrderStatus = OrderStatus.Processing}
             };
         }
         private static IEnumerable<BasketItem> GetPreconfiguredBasketItems()

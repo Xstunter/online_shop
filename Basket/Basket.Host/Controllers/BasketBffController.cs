@@ -51,23 +51,5 @@ namespace Basket.Host.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [RateLimitFilter(10)]
-        [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<IActionResult> TestAdd(TestAddRequest data)
-        {
-            var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-            await _basketService.TestAdd(basketId!, data.Data);
-            return Ok();
-        }
-
-        [HttpPost]
-        [ProducesResponseType(typeof(TestGetResponse), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> TestGet()
-        {
-            var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-            var response = await _basketService.TestGet(basketId!);
-            return Ok(response);
-        }
     }
 }

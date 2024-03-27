@@ -19,7 +19,7 @@ namespace Order.Host.Repositories
             _dbContext = dbContextWrapper.DbContext;
             _logger = logger;
         }
-        public async Task<PaginatedOrder<OrderHistory>> GetAllClientOrdersAsync(int clientId)
+        public async Task<PaginatedOrder<OrderHistory>> GetAllClientOrdersAsync(string clientId)
         {
             try
             {

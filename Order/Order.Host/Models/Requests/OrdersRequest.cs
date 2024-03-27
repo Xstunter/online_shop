@@ -2,6 +2,6 @@
 {
     public class OrdersRequest
     {
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
     }
 }

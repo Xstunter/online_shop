@@ -5,8 +5,6 @@ using Order.Host.Models.Dtos;
 using Order.Host.Models.Response;
 using Order.Host.Repositories.Interfaces;
 using Order.Host.Services.Interfaces;
-using System.Drawing.Printing;
-using static ServiceStack.Diagnostics.Events;
 
 namespace Order.Host.Services
 {
@@ -25,7 +23,7 @@ namespace Order.Host.Services
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
-        public async Task<PaginatedOrdersResponse<OrderHistoryDto>?> GetAllClientOrdersAsync(int clientId)
+        public async Task<PaginatedOrdersResponse<OrderHistoryDto>?> GetAllClientOrdersAsync(string clientId)
         {
             return await ExecuteSafeAsync(async () =>
             {

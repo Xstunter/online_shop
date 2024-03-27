@@ -7,7 +7,7 @@ namespace Order.Host.Models.Requests
     public class AddOrderRequest
     {
         [Required]
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

@@ -30,7 +30,7 @@ namespace Order.Host.Controllers
         [AllowAnonymous]
         [ProducesResponseType(typeof(PaginatedOrdersResponse<OrderHistoryDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<IActionResult> GetAllClientOrders(OrdersRequest request)
+        public async Task<IActionResult> GetAllClientOrders([FromBody] OrdersRequest request)
         {
             var result = await _orderService.GetAllClientOrdersAsync(request.ClientId);
 

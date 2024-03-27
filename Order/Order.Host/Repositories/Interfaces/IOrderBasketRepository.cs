@@ -7,7 +7,7 @@ namespace Order.Host.Repositories.Interfaces
 {
     public interface IOrderBasketRepository
     {
-        Task<int?> AddAsync(int clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> basketItems);
+        Task<int?> AddAsync(string clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> basketItems);
         Task<bool> UpdateAsync(int id, OrderStatus orderStatus);
         Task<bool> DeleteAsync(int id);
     }

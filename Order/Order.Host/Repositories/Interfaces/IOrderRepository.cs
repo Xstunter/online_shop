@@ -5,7 +5,7 @@ namespace Order.Host.Repositories.Interfaces
 {
     public interface IOrderRepository
     {
-        public Task<PaginatedOrder<OrderHistory>> GetAllClientOrdersAsync(int clientId);
+        public Task<PaginatedOrder<OrderHistory>> GetAllClientOrdersAsync(string clientId);
         public Task<PaginatedOrder<OrderHistory>> GetClientOrderAsync(int id);
     }
 }

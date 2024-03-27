@@ -29,13 +29,4 @@ public class BasketService : IBasketService
         return await _basketRepository.GetItemsBasketAsync<T>(userId);
     }
 
-    public Task TestAdd(string userId, string data)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<TestGetResponse> TestGet(string userId)
-    {
-        throw new NotImplementedException();
-    }
 }

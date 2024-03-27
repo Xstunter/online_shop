@@ -111,7 +111,7 @@ namespace Catalog.UnitTests.Services
             int testId = 100;
 
             _catalogItemRepository.Setup(s => s.DeleteAsync(
-                It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(false);
+                It.Is<int>(s => s != _testItem.Id))).ReturnsAsync(true);
 
 
             var result = await _catalogItemService.DeleteAsync(testId);

@@ -19,7 +19,7 @@ namespace Order.Host.Repositories
             _logger = logger;
             _dbContext = dbContextWrapper.DbContext;
         }
-        public async Task<int?> AddAsync(int clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> requestBasketItems)
+        public async Task<int?> AddAsync(string clientId, string name, string lastName, decimal totalPrice, List<AddItemsOrderRequest> requestBasketItems)
         {
             var basketItems = requestBasketItems.Select(x => new BasketItem { ItemId = x.ItemId, Amount = x.Amount, Name = x.Name, Price = x.Price }).ToList();
 
