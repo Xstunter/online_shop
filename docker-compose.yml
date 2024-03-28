@@ -58,8 +58,8 @@ services:
       - CatalogUrl=http://www.alevelwebsite.com:5000/api/v1/catalogbff
       - Authorization__Authority=http://www.alevelwebsite.com:5002
       - IdentityUrl=http://www.alevelwebsite.com:5002
-      - CallBackUrl=http://www.alevelwebsite.com/
-      - RedirectUri=http://www.alevelwebsite.com/signin-oidc
+      - CallBackUrl=http://www.alevelwebsite.com:5001/
+      - RedirectUri=http://www.alevelwebsite.com:5001/signin-oidc
     depends_on:
       - catalog.api
       - identityserver
@@ -73,8 +73,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
-      - MvcUrl=http://www.alevelwebsite.com
+      - MvcUrl=http://www.alevelwebsite.com:5001
       - CatalogApi=http://www.alevelwebsite.com:5000
+      - BasketApi=http://www.alevelwebsite.com:5003
+      - OrderApi=http://www.alevelwebsite.com:5004
     ports:
       - 5002:5002
   nginx:

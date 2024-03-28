@@ -8,21 +8,24 @@
         <div class="esh-identity">
             <form asp-area="" asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
                 <section class="esh-identity-section">
-
                     <div class="esh-identity-name">@UserManager.Parse(User).Name</div>
                     <img class="esh-identity-image" src="~/images/arrow-down.png">
                 </section>
-
                 <section class="esh-identity-drop">
-                    
-                    <a class="esh-identity-item"
-                       href="javascript:document.getElementById('logoutForm').submit()">
-
+                    <a class="esh-identity-item" href="javascript:document.getElementById('logoutForm').submit()">
                         <div class="esh-identity-name esh-identity-name--upper">Log Out</div>
                         <img class="esh-identity-image" src="~/images/logout.png">
                     </a>
+                    <a class="esh-identity-item">
+                        <div class="esh-identity-name esh-identity-name--upper" onclick="location.href='@Url.Action("Index", "Order")'">History</div>
+                    </a>
                 </section>
             </form>
+        </div>
+    </section>
+    <section class="col-lg-2 col-md-2 col-xs-12">
+        <div class="container">
+            <a href="@Url.Action("Index", "Basket")"><i class="fa fa-shopping-cart fa-2x"></i></a>
         </div>
     </section>
 }
@@ -32,7 +35,6 @@ else
         <div class="esh-identity">
             <section class="esh-identity-section">
                 <div class="esh-identity-item">
-
                     <a asp-area="" asp-controller="Account" asp-action="SignIn" class="esh-identity-name esh-identity-name--upper">
                         Login
                     </a>
@@ -40,8 +42,9 @@ else
             </section>
         </div>
     </section>
-
-    <section class="col-lg-1 col-xs-12">
-
+    <section class="col-lg-3 col-md-3 col-xs-12">
+        <div class="container">
+            <a href="@Url.Action("Index", "Basket")"><i class="fa fa-shopping-cart fa-2x"></i></a>
+        </div>
     </section>
 }

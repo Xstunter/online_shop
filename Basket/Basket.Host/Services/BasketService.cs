@@ -19,6 +19,11 @@ public class BasketService : IBasketService
         await _basketRepository.AddItemToBasketAsync(userId, data);
     }
 
+    public async Task<bool> DeleteAllItemsBasketAsync(string userId)
+    {
+        return await _basketRepository.DeleteAllItemsBasketAsync(userId);
+    }
+
     public async Task<bool> DeleteItemBasketAsync(string userId, int id)
     {
         return await _basketRepository.DeleteItemBasketAsync(userId, id);

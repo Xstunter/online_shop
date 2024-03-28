@@ -68,19 +68,6 @@ namespace Basket.Host.Repositories
 
             _logger.LogInformation($"Cached value for key {key} cached");
         }
-
-        public async Task<T> GetItemBasketAsync<T>(string key)
-        {
-            var redis = GetRedisDatabase();
-
-            var cacheKey = GetItemCacheKey(key);
-
-            var serialized = await redis.StringGetAsync(cacheKey);
-
-            return serialized.HasValue ?
-                _jsonSerializer.Deserialize<T>(serialized.ToString())
-                : default(T)!;
-        }
         public async Task<bool> DeleteItemBasketAsync(string key, int id)
         {
             var redis = GetRedisDatabase();
@@ -124,6 +111,18 @@ namespace Basket.Host.Repositories
                 return items;
             }
             return new List<T>();
+        }
+
+        public async Task<bool> DeleteAllItemsBasketAsync(string userId)
+        {
+            var redis = GetRedisDatabase();
+            var keyExists = await redis.KeyExistsAsync(userId);
+            if (!keyExists)
+            {
+                return false;
+            }
+            await redis.KeyDeleteAsync(userId);
+            return true;
         }
     }
 }
