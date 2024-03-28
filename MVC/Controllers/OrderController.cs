@@ -49,6 +49,7 @@ namespace MVC.Controllers
             };
 
             await _orderService.AddOrderHistory(orderHistory);
+            await _basketService.DeleteAllItemsBasket();
 
             return RedirectToAction("Index", "Catalog");
         }

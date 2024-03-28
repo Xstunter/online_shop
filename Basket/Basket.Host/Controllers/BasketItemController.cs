@@ -21,12 +21,15 @@ namespace Basket.Host.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly IBasketService _basketService;
+        private readonly ILogger<BasketItemController> _logger;
         public BasketItemController (
             HttpClient httpClient,
-            IBasketService basketService)
+            IBasketService basketService,
+            ILogger<BasketItemController> logger)
         {
             _httpClient = httpClient;
             _basketService = basketService;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -78,6 +81,22 @@ namespace Basket.Host.Controllers
                 return NotFound(id);
             }
             return Ok(id);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteAllBasketItems()
+        {
+            string userId = User.FindFirstValue("sub");
+
+            var deleteStatus = await _basketService.DeleteAllItemsBasketAsync(userId);
+
+            if (deleteStatus == false)
+            {
+                _logger.LogInformation("Basket not found");
+                return NotFound();
+            }
+            return Ok();
         }
 
         [HttpPost]

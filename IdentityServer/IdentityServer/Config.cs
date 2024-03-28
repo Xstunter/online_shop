@@ -64,8 +64,7 @@ namespace IdentityServer
                     ClientSecrets = {new Secret("secret".Sha256())},
                     RedirectUris = 
                     { 
-                        $"{configuration["MvcUrl"]}/signin-oidc",
-                        "http://www.alevelwebsite.com:5001/signin-oidc"
+                        $"{configuration["MvcUrl"]}/signin-oidc"
                     },
                     AllowedScopes = {"openid", "profile", "mvc", "basket.basketItem", "order.orderHistory"},
                     RequirePkce = true,
@@ -117,7 +116,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { $"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
+                    RedirectUris = { $"{configuration["BasketApi"]}/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
                     PostLogoutRedirectUris = { $"{configuration["BasketApi"]}/swagger/" },
 
                     AllowedScopes =
@@ -143,7 +142,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { $"http://www.alevelwebsite.com:5004/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
+                    RedirectUris = { $"{configuration["OrderApi"]}/swagger/oauth2-redirect.html" }, //"http://www.alevelwebsite.com:5003/swagger/oauth2-redirect.html"
                     PostLogoutRedirectUris = { $"{configuration["OrderApi"]}/swagger/" },
 
                     AllowedScopes =

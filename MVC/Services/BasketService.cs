@@ -27,6 +27,11 @@ namespace MVC.Services
             await _httpClient.SendAsync<object, int>($"{_settings.Value.BasketUrl}/AddBasketItem", HttpMethod.Post, id);
         }
 
+        public async Task DeleteAllItemsBasket()
+        {
+            await _httpClient.SendAsync<object, object>($"{_settings.Value.BasketUrl}/DeleteAllBasketItems", HttpMethod.Post, null);
+        }
+
         public async Task DeleteItemBasket(int id)
         {
             await _httpClient.SendAsync<object, int>($"{_settings.Value.BasketUrl}/DeleteBasketItem", HttpMethod.Post, id);
@@ -36,5 +41,6 @@ namespace MVC.Services
         {
             return _httpClient.SendAsync<List<BasketItems>, object>($"{_settings.Value.BasketUrl}/GetItemsBasket", HttpMethod.Post, null);
         }
+        
     }
 }
