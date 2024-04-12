@@ -65,6 +65,7 @@ namespace MVC.Controllers
             };
 
             var order = await _orderService.GetOrderHistory(request);
+
             if(order == null)
             {
                 return View("Error");

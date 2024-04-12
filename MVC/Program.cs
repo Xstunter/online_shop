@@ -48,8 +48,6 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("openid");
         options.Scope.Add("profile");
         options.Scope.Add("mvc");
-        options.Scope.Add("basket.basketItem");
-        options.Scope.Add("order.orderHistory");
     });
 
 
@@ -62,6 +60,17 @@ builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "CorsPolicy",
+        builder => builder
+            .SetIsOriginAllowed((host) => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 var app = builder.Build();
 
@@ -76,6 +85,7 @@ app.UseStaticFiles();
 app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
 
 app.UseRouting();
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
