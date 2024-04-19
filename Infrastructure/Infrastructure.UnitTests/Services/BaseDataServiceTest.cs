@@ -1,4 +1,5 @@
 using System.Threading;
+using FluentAssertions;
 using Infrastructure.UnitTests.Mocks;
 
 namespace Infrastructure.UnitTests.Services;
@@ -41,7 +42,7 @@ public class BaseDataServiceTest
         // act
         await _mockService.RunWithException();
 
-        // assert
+            // assert
         _dbContextTransaction.Verify(t => t.CommitAsync(CancellationToken.None), Times.Never);
         _dbContextTransaction.Verify(t => t.RollbackAsync(CancellationToken.None), Times.Once);
 
